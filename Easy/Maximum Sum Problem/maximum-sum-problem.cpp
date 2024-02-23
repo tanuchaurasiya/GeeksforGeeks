@@ -13,7 +13,7 @@ class Solution
             int z = int(temp/4);
             int sum=x+y+z;
             if(sum>temp){
-                return + maxSum(x) + maxSum(y) + maxSum(z);
+                return  maxSum(x) + maxSum(y) + maxSum(z);
             }
             else{
                 return temp;

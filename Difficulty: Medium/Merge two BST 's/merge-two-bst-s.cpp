@@ -94,37 +94,37 @@ struct Node {
 */
 class Solution {
   public:
-    void printInorder(struct Node* node, vector<int> &res){
-        if (node == NULL)
-            return;
-        printInorder(node->left, res);
- 
-        res.push_back(node->data);
-        printInorder(node->right, res);
-}
     vector<int> merge(Node *root1, Node *root2) {
-        vector<int> arr1,arr2;
-        printInorder(root1, arr1);
-        printInorder(root2, arr2);
-        int n1 = arr1.size();
-        int n2 = arr2.size();
-        int i = 0, j = 0, k = 0;
-        vector<int> arr3(n1+n2);
-    
-        while (i<n1 && j <n2){
-            if (arr1[i] < arr2[j])
-                arr3[k++] = arr1[i++];
-            else
-                arr3[k++] = arr2[j++];
-        }
- 
-        while (i < n1)
-            arr3[k++] = arr1[i++];
- 
-        while (j < n2)
-            arr3[k++] = arr2[j++];
-            
-        return arr3;
+        vector<int>ans;
+       stack<Node *>s1,s2;
+       while(root1 || root2 || s1.size() || s2.size())
+       {
+           while(root1)
+           {
+               s1.push(root1);
+               root1=root1->left;
+           }
+           while(root2)
+           {
+               s2.push(root2);
+               root2=root2->left;
+           }
+           if(s2.empty()|| (s1.size()&&s1.top()->data<s2.top()->data))
+           {
+               root1=s1.top();
+               ans.push_back(root1->data);
+               s1.pop();
+               root1=root1->right;
+           }
+           else
+           {
+               root2=s2.top();
+               ans.push_back(root2->data);
+               s2.pop();
+               root2=root2->right;
+           }
+       }
+       return ans;
     }
 };
 

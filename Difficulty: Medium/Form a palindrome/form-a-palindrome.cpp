@@ -1,52 +1,52 @@
 //{ Driver Code Starts
 //Initial template for C++
 
-#include <bits/stdc++.h>
-using namespace std;
+#include<bits/stdc++.h> 
+using namespace std; 
 
 // } Driver Code Ends
 //User function template for C++
 
-class Solution {
-    // Helper function to compute the LCS
-    int lcs(string s, string t) {
-        int n = s.size(), m = t.size();
-        vector<vector<int>> dp(n + 1, vector<int>(m + 1, 0));
-        for (int idx1 = 1; idx1 <= n; idx1++) {
-            for (int idx2 = 1; idx2 <= m; idx2++) {
-                if (s[idx1 - 1] == t[idx2 - 1])
-                    dp[idx1][idx2] = 1 + dp[idx1 - 1][idx2 - 1];
-                else
-                    dp[idx1][idx2] = max(dp[idx1 - 1][idx2], dp[idx1][idx2 - 1]);
-            }
+class Solution{   
+public:
+    int solve(string &s, int &n, int i, int j, vector<vector<int>>&dp){
+        if(i == j || i>j)
+            return 0;
+        
+        if(dp[i][j]!= -1){
+            return dp[i][j];
         }
-        return dp[n][m];
+        
+        if(s[i] == s[j]){
+            dp[i][j] =  solve(s,n,i+1,j-1, dp);
+        }else{
+            dp[i][j] =  1 + min(solve(s,n,i,j-1, dp), solve(s,n,i+1,j, dp));
+        }
+        
+        return dp[i][j];
     }
-
-  public:
-    // Main function to find the minimum number of insertions to make the string a palindrome
-    int countMin(string s) {
-        // Reverse the string to find the LCS with the original string
-        string t = s;
-        reverse(t.begin(), t.end());
-        int res = lcs(s, t);
-        // The minimum number of insertions is the length of the string minus the LCS length
-        return s.size() - res;
+    int findMinInsertions(string s){
+        int n = s.length();
+        vector<vector<int>>dp(n+1, vector<int>(n+1, -1));
+        // code here 
+         return solve(s, n, 0, s.length()-1, dp);
     }
 };
 
 //{ Driver Code Starts.
+
+
+
 int main(){
     int t;
-    cin >> t;
+    cin>>t;
     while(t--){
-        string str;
-        cin >> str;
+        string S;
+        cin>>S;
         Solution ob;
-        cout << ob.countMin(str) << endl;
+        cout<<ob.findMinInsertions(S)<<endl;
     }
-return 0;
+    return 0;
 }
-
 
 // } Driver Code Ends

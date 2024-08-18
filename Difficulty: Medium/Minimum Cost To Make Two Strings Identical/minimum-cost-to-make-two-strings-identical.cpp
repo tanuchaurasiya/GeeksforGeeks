@@ -10,7 +10,7 @@ class Solution {
     vector<vector<int>> dp;
     int n1;
     int n2;
-    int findLCSLength(const std::string &text1, const std::string &text2, int index1, int index2) {
+    int findLCSLength(string &text1, string &text2, int index1, int index2) {
         if (index1 >= n1 || index2 >= n2) return 0;
         
         if(dp[index1][index2]!=-1) return dp[index1][index2];
@@ -18,7 +18,8 @@ class Solution {
         if (text1[index1] == text2[index2]) {
             dp[index1][index2] = 1 + findLCSLength(text1, text2, index1 + 1, index2 + 1);
         } else {
-            dp[index1][index2] = max(findLCSLength(text1, text2, index1, index2 + 1), findLCSLength(text1, text2, index1 + 1, index2));
+            dp[index1][index2] = max(findLCSLength(text1, text2, index1, index2 + 1), 
+                                     findLCSLength(text1, text2, index1 + 1, index2));
         }
         return dp[index1][index2];
     }

@@ -1,65 +1,53 @@
 //{ Driver Code Starts
 #include <bits/stdc++.h>
-
 using namespace std;
 
+
 // } Driver Code Ends
-class Solution{
-public:
-    int maxIndexDiff(int nums[], int n) {
-        int i=0;
-        vector<int> maxArray(n,INT_MIN);
-        int currMax=INT_MIN;
-        for(int i=n-1;i>=0;i--){
-            currMax=max(currMax, nums[i]);
-            maxArray[i]=currMax;
-        }
-
-        // for(auto i:maxArray) cout<<i<<" ";
-        // cout<<endl;
-
-        int res=0;
+class Solution {
+  public:
+    // arr[]: input array
+    // Function to find the maximum index difference.
+    int maxIndexDiff(vector<int>& nums) {
+        int n = nums.size();
+        stack<int> st;
 
         for(int i=0;i<n;i++){
-            int l = i+1;
-            int h = n-1;
+            if(st.empty() || nums[st.top()] > nums[i]) st.push(i);
+        }
 
-            while(l<=h){
-                int m = (l+h)/2;
-                // cout<<l<<" "<<h<<" "<<m<<endl;
-                if(maxArray[m]>=nums[i]){
-                    l=m+1;
-                }
-                else{
-                    h=m-1;
-                }
+        int res=0;
+        for(int i=n-1;i>=0;i--){
+            while((!st.empty()) && nums[i] >= nums[st.top()]){
+                res=max(res, i-st.top());
+                st.pop();
             }
-            // cout<<"end="<<l<<" "<<h<<endl;
-            res=max(res, l-i-1);
         }
         return res;
     }
-
 };
-
-
 
 //{ Driver Code Starts.
 
 int main() {
-    int t;
-    cin >> t;
+    string ts;
+    getline(cin, ts);
+    int t = stoi(ts);
     while (t--) {
-        int n, i;
-        cin >> n;
-        int a[n];
-        for (i = 0; i < n; i++) {
-            cin >> a[i];
+        string line;
+        getline(cin, line);
+        stringstream ss(line);
+        vector<int> nums;
+        int num;
+        while (ss >> num) {
+            nums.push_back(num);
         }
         Solution ob;
-        auto ans = ob.maxIndexDiff(a, n);
-        cout << ans << "\n";
+
+        // calling maxIndexDiff() function
+        cout << ob.maxIndexDiff(nums) << endl;
     }
+
     return 0;
 }
 // } Driver Code Ends

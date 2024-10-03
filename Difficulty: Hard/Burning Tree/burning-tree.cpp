@@ -96,69 +96,71 @@ struct Node {
 */
 class Solution {
   public:
-  void storeParent(Node* root, unordered_map<Node*,Node*> &parent){
+    unordered_map<Node*,Node*> parent;
+    
+    void feedParent(Node* root){
         if(root==NULL) return;
-        if(root->left)
+        
+        if(root->left){
             parent[root->left] = root;
-        if(root->right)
+        }
+        if(root->right){
             parent[root->right] = root;
-        storeParent(root->left, parent);
-        storeParent(root->right, parent);
+        }
+        feedParent(root->left);
+        feedParent(root->right);
     }
-    Node* findStart(int start, Node* root){ 
-        if(root==NULL) return NULL;
+    Node* findTar(Node* root, int target)
+    {
+        if(root==NULL) return root;
         
-        if(root->data==start) return root;
+        if(root->data==target) return root;
         
-        Node* l = findStart(start, root->left);
-        if(l) return l;
+        auto left = findTar(root->left, target);
+        if(left) return left;
         
-        Node* r = findStart(start, root->right);
-        if(r) return r;
+        auto right = findTar(root->right, target);
+        if(right) return right;
+        
         return NULL;
-        
     }
-    int minTime(Node* root, int start)  {
-        unordered_map<Node*, Node*> parent;
-        storeParent(root, parent);
-        queue<pair<Node*, int>> q;
-        Node* x = findStart(start, root);
-        q.push({x, 0});
+    int minTime(Node* root, int target) 
+    {
+        feedParent(root);
         
-        unordered_map<int,int> visited;
-        visited[start]=1;
+        queue<pair<Node*, int>> q;
+        auto tar = findTar(root, target);
+        q.push({tar,0});
         int res=0;
+        unordered_map<Node*,int> vis;
+        vis[tar]=1;
         while(!q.empty()){
-            Node* node = q.front().first;
-            int time = q.front().second;
+            auto n = q.front().first;
+            auto d = q.front().second;
             q.pop();
-            if(time > res)
-                res=time;
-            Node* par = parent[node];
-            Node* chi1 = node->left;
-            Node* chi2 = node->right;
-            if(par && visited[par->data]==0) {
-                visited[par->data] = 1;
-                q.push({par,time+1});
+            res=max(res, d);
+            // cout<<n->data<<" "<<d<<endl;
+            if(parent[n] && vis[parent[n]]==0){
+                q.push({parent[n], d+1});
+                vis[parent[n]]=1;
             }
             
-            if(chi1 && visited[chi1->data]==0) {
-                visited[chi1->data] = 1;
-                q.push({chi1, time+1});
+            if(n->left && vis[n->left]==0){
+                q.push({n->left, d+1});
+                vis[n->left]=1;
             }
             
-            if(chi2 && visited[chi2->data]==0) {
-                visited[chi2->data] = 1;
-                q.push({chi2, time+1});
+            if(n->right && vis[n->right]==0){
+                q.push({n->right, d+1});
+                vis[n->right]=1;
             }
             
         }
+        
         return res;
+        
     }
-    
-    
 };
-
 
 //{ Driver Code Starts.
 

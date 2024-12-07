@@ -4,18 +4,16 @@ using namespace std;
 
 
 // } Driver Code Ends
-
-// 1 5 7 2 3 4
 class Solution {
   public:
-    long long res=0;
-    void merge(int l, int m, int h, long long arr[])
+    int res=0;
+    void merge(int l, int m, int h, vector<int> &arr)
     {
         int n1=m-l+1;
         int n2=h-m;
         // cout<<"\nl="<<l<<" m="<<m<<" h="<<h<<endl;
-        vector<long long> a1(n1);
-        vector<long long> a2(n2);
+        vector<int> a1(n1);
+        vector<int> a2(n2);
         // cout<<"a1=";
         for(int i=0;i<n1;i++){
             // cout<<arr[l+i]<<" ";
@@ -58,7 +56,7 @@ class Solution {
             k++;
         }
     }
-    void mergeSort(int l, int h, long long arr[]){
+    void mergeSort(int l, int h, vector<int> &arr){
         if(l<h){
             int mid = (l+h)/2;
             mergeSort(l,mid,arr);
@@ -68,30 +66,36 @@ class Solution {
         
     }
     
-    long long int inversionCount(long long arr[], int n) 
-    {
+    
+    int inversionCount(vector<int> &arr) {
+        int n = arr.size();
         mergeSort(0, n-1, arr);
         return res;
     }
 };
 
+
+
+
 //{ Driver Code Starts.
 
 int main() {
 
-    long long T;
+    int T;
     cin >> T;
-
+    cin.ignore();
     while (T--) {
-        int N;
-        cin >> N;
-
-        long long A[N];
-        for (long long i = 0; i < N; i++) {
-            cin >> A[i];
-        }
+        int n;
+        vector<int> a;
+        string input;
+        getline(cin, input);
+        stringstream ss(input);
+        int num;
+        while (ss >> num)
+            a.push_back(num);
         Solution obj;
-        cout << obj.inversionCount(A, N) << endl;
+        cout << obj.inversionCount(a) << endl;
+        cout << "~" << endl;
     }
 
     return 0;

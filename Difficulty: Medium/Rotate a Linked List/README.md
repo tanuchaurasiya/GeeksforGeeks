@@ -1,4 +1,4 @@
-<h2><a href="https://www.geeksforgeeks.org/problems/rotate-a-linked-list/1">Rotate a Linked List</a></h2><h3>Difficulty Level : Difficulty: Medium</h3><hr><div class="problems_problem_content__Xm_eO"><p><span style="font-size: 14pt;">Given the <strong>head</strong> of a singly linked list, your task is to <strong>left rotate</strong> the linked list&nbsp;<strong>k</strong> times.</span></p>
+<h2><a href="https://www.geeksforgeeks.org/problems/rotate-a-linked-list/0">Rotate a Linked List</a></h2><h3>Difficulty Level : Difficulty: Medium</h3><hr><div class="problems_problem_content__Xm_eO"><p><span style="font-size: 14pt;">Given the <strong>head</strong> of a singly linked list, your task is to <strong>left rotate</strong> the linked list&nbsp;<strong>k</strong> times.</span></p>
 <p><span style="font-size: 14pt;"><strong>Examples:</strong></span></p>
 <pre><span style="font-size: 14pt;"><strong>Input: </strong>head<strong> =</strong> 10 -&gt; 20 -&gt; 30 -&gt; 40 -&gt; 50, k = 4
 <strong>Output: </strong>50 -&gt; 10 -&gt; 20 -&gt; 30 -&gt; 40<strong>

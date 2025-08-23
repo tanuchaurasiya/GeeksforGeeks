@@ -1,16 +1,7 @@
-//{ Driver Code Starts
-// Initial template for C++
-
-#include <bits/stdc++.h>
-using namespace std;
-
-
-// } Driver Code Ends
-// User function template in C++
-
 class Solution {
   public:
-    long long findPages(long long maxPage, int arr[], int n){
+
+    long long findPages(long long maxPage, vector<int> &arr, int n){
         long long stu=1;
         long long currPage=arr[0];
         
@@ -28,7 +19,8 @@ class Solution {
         return stu;
     }
     
-    long long findPages(int n, int arr[], int m) {
+    int findPages(vector<int> &arr, int m) {
+        int n=arr.size();
         if(m>n) return -1;
         long long low=INT_MIN;
         long long high=0;
@@ -53,25 +45,3 @@ class Solution {
         return low;
     }
 };
-
-//{ Driver Code Starts.
-
-int main() {
-    int t;
-    cin >> t;
-    while (t--) {
-        int n;
-        cin >> n;
-        int A[n];
-        for (int i = 0; i < n; i++) {
-            cin >> A[i];
-        }
-        int m;
-        cin >> m;
-        Solution ob;
-        cout << ob.findPages(n, A, m) << endl;
-    }
-    return 0;
-}
-
-// } Driver Code Ends

@@ -1,6 +1,6 @@
 class Solution {
   public:
-    vector<int> nextLargerElement(vector<int> &arr) {
+    vector<int> nextGreater(vector<int> &arr) {
         int n=arr.size();
       vector<int>ans(2*n);
       
@@ -40,6 +40,7 @@ class Solution {
           
       }
       return fi;
+        
         
     }
 };

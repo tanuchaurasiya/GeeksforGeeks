@@ -1,9 +1,3 @@
-//{ Driver Code Starts
-#include <bits/stdc++.h>
-using namespace std;
-
-
-// } Driver Code Ends
 class Solution {
   public:
     int res=0;
@@ -76,29 +70,3 @@ class Solution {
 
 
 
-
-//{ Driver Code Starts.
-
-int main() {
-
-    int T;
-    cin >> T;
-    cin.ignore();
-    while (T--) {
-        int n;
-        vector<int> a;
-        string input;
-        getline(cin, input);
-        stringstream ss(input);
-        int num;
-        while (ss >> num)
-            a.push_back(num);
-        Solution obj;
-        cout << obj.inversionCount(a) << endl;
-        cout << "~" << endl;
-    }
-
-    return 0;
-}
-
-// } Driver Code Ends

@@ -1,6 +1,7 @@
 class Solution {
   public:
     int hIndex(vector<int>& c) {
+        // code here
         int n=c.size();
         sort(c.begin(), c.end());
         int maxh=0;
@@ -10,5 +11,6 @@ class Solution {
             maxh=max(maxh,min(h, times));
         }
         return maxh;
+        
     }
 };

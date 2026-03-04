@@ -1,6 +1,7 @@
 class Solution {
   public:
     int maxSubarrayXOR(vector<int>& arr, int k) {
+        // code here
         int n=arr.size();
         int currXor=arr[0];
         for(int i=1;i<k;i++) currXor^=arr[i];
@@ -17,6 +18,5 @@ class Solution {
             if(currXor>maxXor) maxXor=currXor;
         }
         return maxXor;
-        
     }
 };

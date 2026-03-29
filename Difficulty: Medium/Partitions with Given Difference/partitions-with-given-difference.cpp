@@ -1,13 +1,9 @@
-//{ Driver Code Starts
-#include <bits/stdc++.h>
-using namespace std;
-
-// } Driver Code Ends
 class Solution {
   public:
-    int countPartitions(int n, int d, vector<int>& arr) {
+    int countPartitions(vector<int>& arr, int d) {
         int totalSum=0;
         int mod=1e9+7;
+        int n=arr.size();
         for(int i=0;i<n;i++) totalSum+=arr[i];
         vector<vector<int>> dp;
     
@@ -36,29 +32,6 @@ class Solution {
         
         
         return dp[n-1][target];
-
         
     }
 };
-
-//{ Driver Code Starts.
-int main() {
-    int t;
-    cin >> t;
-    while (t--) {
-        int n, d;
-        cin >> n >> d;
-        vector<int> arr;
-
-        for (int i = 0; i < n; ++i) {
-            int x;
-            cin >> x;
-            arr.push_back(x);
-        }
-
-        Solution obj;
-        cout << obj.countPartitions(n, d, arr) << "\n";
-    }
-    return 0;
-}
-// } Driver Code Ends

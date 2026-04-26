@@ -1,67 +1,35 @@
-//{ Driver Code Starts
-#include <bits/stdc++.h>
-using namespace std;
-
-
-// } Driver Code Ends
-
 class Solution {
   public:
-    
-    bool dfs(int node, int par, vector<vector<int>>& adj, vector<int> &visited){
+    bool dfs(int node, vector<vector<int>> &graph, unordered_map<int,int> &visited, int parent)
+    {
         visited[node]=1;
-        for(auto child: adj[node]){
-            if(!visited[child]){
-                if(dfs(child, node, adj, visited)==true)
-                    return true;
+        for(auto child:graph[node])
+        {
+            if(visited[child]){
+                if(child!=parent) return true;
+                continue;
             }
             
-            else if(child!=par) return true;
+            if(dfs(child,graph, visited, node)) return true;
         }
         return false;
     }
-	bool isCycle(int V, vector<vector<int>>& adj) {
-	    vector<int> visited(V);
-	    for(int i=0;i<V;i++) {
-	        if(!visited[i])
-	        {
-	            if (dfs(i, -1, adj, visited)) return true;
-	        }
-	    }
-	    return false;
-	}
-    
-};
-
-
-//{ Driver Code Starts.
-
-int main() {
-    int tc;
-    cin >> tc;
-    cin.ignore();
-    while (tc--) {
-        int V, E;
-        cin >> V >> E;
-        cin.ignore();
-        vector<vector<int>> edges;
-        for (int i = 1; i <= E; i++) {
-            int u, v;
-            cin >> u >> v;
-            edges.push_back({u, v});
+    bool isCycle(int V, vector<vector<int>>& edges) {
+        vector<vector<int>> graph(V);
+        unordered_map<int,int> visited;
+        
+        for(auto e:edges)
+        {
+            graph[e[0]].push_back(e[1]);
+            graph[e[1]].push_back(e[0]);
         }
-
-        Solution obj;
-        bool ans = obj.isCycle(V, edges);
-        if (ans)
-            cout << "true\n";
-        else
-            cout << "false\n";
-
-        cout << "~"
-             << "\n";
+        for(int i=0;i<V;i++)
+        {
+            if(visited[i]==0){
+                if(dfs(i, graph, visited, -1)) return true;
+            } 
+        }
+        return false;
+        
     }
-    return 0;
-}
-
-// } Driver Code Ends
+};

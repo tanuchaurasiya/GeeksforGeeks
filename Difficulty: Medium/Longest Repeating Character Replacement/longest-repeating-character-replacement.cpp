@@ -10,7 +10,7 @@ class Solution {
             freq[s[right] - 'A']++;
             maxFreq = max(maxFreq, freq[s[right] - 'A']);
 
-            while ((right - left + 1) - maxFreq > k) {
+            if ((right - left + 1) - maxFreq > k) {
                 freq[s[left] - 'A']--;
                 left++;
             }

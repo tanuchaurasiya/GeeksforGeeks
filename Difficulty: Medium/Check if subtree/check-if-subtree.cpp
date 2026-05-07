@@ -1,34 +1,64 @@
-/* A binary tree node
-
+/*
+Definition for Node
 struct Node
 {
     int data;
-    struct Node* left;
-    struct Node* right;
+    Node* left;
+    Node* right;
 
     Node(int x){
         data = x;
-        left = right = NULL;
+        left = right = nullptr;
     }
 };
- */
+*/
 
-class Solution
-{
+class Solution {
   public:
-    //Function to check if S is a subtree of tree T.
-    bool isSameTree(Node* s, Node* t) {
-        if (s ==NULL && t==NULL) return true; // Both trees are empty
-        if (s==NULL || t==NULL) return false; // One tree is empty, and the other is not
-        if (s->data != t->data) return false; // Values do not match
-        // Recursively check left and right subtrees
-        return isSameTree(s->left, t->left) && isSameTree(s->right, t->right);
-    }
-
-    bool isSubTree(Node* root, Node* subRoot) {
-        if (root == NULL) return false; // If root is null, subRoot cannot be a subtree
-        if(isSameTree(root, subRoot)) return true; // Check if trees are identical
-        // Recursively check left and right subtrees
-        return isSubTree(root->left, subRoot) || isSubTree(root->right, subRoot);
+  unordered_map<int,int> f(Node* root)
+  {
+        unordered_map<int,int>mpp; //{node-->index}
+        queue<pair<Node*,int>>q;
+        q.push({root,0});
+        while(!q.empty())
+        {
+            Node* node=q.front().first;
+            int k=q.front().second;
+            mpp[node->data]=k;
+            q.pop();
+            if(node->left)
+            {
+                q.push({node->left,2*k+1});
+            }
+            if(node->right)
+            {
+                q.push({node->right,2*k+2});
+            }
+        }
+        return mpp;
+  }
+    bool isSubTree(Node *root1, Node *root2) {
+        unordered_map<int,int>r2=f(root2);
+        queue<Node*>q;
+        q.push(root1);
+        while(!q.empty())
+        {
+            Node* node=q.front();
+            unordered_map<int,int>r1=f(node);
+            q.pop();
+            if(r1==r2)
+            {
+                return true;
+            }
+            if(node->left)
+            {
+                q.push(node->left);
+            }
+            if(node->right)
+            {
+                q.push(node->right);
+            }
+        }
+        return false;
     }
 };

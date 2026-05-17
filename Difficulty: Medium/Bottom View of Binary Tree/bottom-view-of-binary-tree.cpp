@@ -3,17 +3,14 @@
 
 class Solution {
   public:
-    // static bool comparator(pair<int,int> p1, pair<int,int> p2){
-    //   // custom definition code 
-    //     if(p1.first>=p2.first) 
-    //       return true;
-    //     return false;
-    // }
-    
+   int min_key=INT_MAX;
+   int max_key=INT_MIN;
     void help(Node *root, int row, int col, unordered_map<int, pair<int,int>> &mp){  
         if (root==NULL) 
             return ;
         
+        min_key=min(min_key, col);
+        max_key=max(max_key, col);
     
         if(mp.find(col)==mp.end()) {
             mp[col]={row,root->data};
@@ -30,21 +27,13 @@ class Solution {
     
 
     vector <int> bottomView(Node *root){ 
-        
+        if(root==NULL) return {};
         unordered_map<int, pair<int,int>> mp;
         help(root, 0, 0, mp); 
-        
-        vector<int> keys; 
-        
-        for(auto i:mp){
-            keys.push_back(i.first); 
-            // cout<<i.first<<endl;
-        } 
-        sort(keys.begin(), keys.end()); 
         vector<int> res; 
         
         
-        for(auto key:keys){
+        for(int key=min_key; key<=max_key; key++){
             res.push_back(mp[key].second);
         } 
         

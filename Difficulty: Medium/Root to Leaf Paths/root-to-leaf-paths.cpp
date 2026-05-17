@@ -1,55 +1,38 @@
-
 /*
-
-Definition for Binary Tree Node
-struct Node
-{
+Definition for Node
+class Node {
+  public:
     int data;
-    struct Node* left;
-    struct Node* right;
+    Node* left;
+    Node* right;
 
-    Node(int x){
-        data = x;
-        left = right = NULL;
+    Node(int val) {
+        data = val;
+        left = right = nullptr;
     }
 };
 */
 
 class Solution {
   public:
-  void RootToLeaf(Node* root, vector<int> &v, vector<vector<int>>&res){
-    v.push_back(root->data);
-    if (root->left==NULL && root->right==NULL){
-            res.push_back(v);
-            // v.pop_back();
+    void help(Node* root, vector<int>temp, vector<vector<int>> &res)
+    {
+        if(root->left==NULL && root->right==NULL) {
+            temp.push_back(root->data);
+            res.push_back(temp);
             return;
-    } 
-    else if (root->left!=NULL && root->right==NULL){
-         RootToLeaf(root->left,v,res); 
-         v.pop_back();
+        }
+        temp.push_back(root->data);
+        if(root->left) help(root->left, temp, res);
+        if(root->right) help(root->right, temp, res);
     }
-    
-    else if (root->left==NULL && root->right!=NULL){
-         RootToLeaf(root->right,v,res); 
-         v.pop_back();
-    }
-   
-    else{
-        RootToLeaf(root->left,v,res); 
-        v.pop_back();
-        RootToLeaf(root->right,v,res);
-        v.pop_back();
-    }
-}
-
+        
     vector<vector<int>> Paths(Node* root) {
-        vector<int> v;
-        vector<vector<int>> res; 
-        RootToLeaf(root,v,res);
+        if(root==NULL) return {{}};
+        vector<vector<int>> res;
+        vector<int>temp;
+        help(root, temp,res);
         return res;
+        
     }
 };
-
-
-
-

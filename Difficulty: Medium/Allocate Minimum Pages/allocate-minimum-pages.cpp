@@ -35,11 +35,12 @@ class Solution {
             
             long long stu =  findPages(mid, arr, n);
             
-            if(stu<=m){
-                high=mid-1;
+            if(stu>m){
+                low=mid+1;
+                
             }
             else{
-                low=mid+1;
+                high=mid-1;
             }
         }
         return low;

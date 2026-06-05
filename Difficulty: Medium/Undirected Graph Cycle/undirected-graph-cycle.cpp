@@ -1,35 +1,35 @@
 class Solution {
   public:
-    bool dfs(int node, vector<vector<int>> &graph, unordered_map<int,int> &visited, int parent)
+    bool dfs(int node, vector<vector<int>>& adj, int par, vector<int> &visited)
     {
         visited[node]=1;
-        for(auto child:graph[node])
+        for(auto child: adj[node])
         {
-            if(visited[child]){
-                if(child!=parent) return true;
-                continue;
+            if(!visited[child]){
+                if(dfs(child, adj, node,visited)) return true;
             }
-            
-            if(dfs(child,graph, visited, node)) return true;
+            else{
+                if(child!=par) return true;
+            }
         }
         return false;
     }
     bool isCycle(int V, vector<vector<int>>& edges) {
-        vector<vector<int>> graph(V);
-        unordered_map<int,int> visited;
+        vector<int> visited(V);
+        vector<vector<int>> adj(V);
         
-        for(auto e:edges)
+        for(auto i:edges)
         {
-            graph[e[0]].push_back(e[1]);
-            graph[e[1]].push_back(e[0]);
+            adj[i[0]].push_back(i[1]);
+            adj[i[1]].push_back(i[0]);
         }
+        
         for(int i=0;i<V;i++)
         {
-            if(visited[i]==0){
-                if(dfs(i, graph, visited, -1)) return true;
-            } 
+            if(visited[i]) continue;
+            if(dfs(i, adj, -1, visited)) return true;
         }
-        return false;
         
+        return false;
     }
 };

@@ -1,0 +1,10 @@
+<h2><a href="https://www.geeksforgeeks.org/problems/length-unsorted-subarray3022/1">Sort Unsorted Subarray</a></h2><h3>Difficulty Level : Difficulty: Easy</h3><hr><div class="problems_problem_content__Xm_eO" style="--text-color: var(--problem-text-color);"><p><span style="font-size: 18px;">Given an unsorted array <strong>arr[]</strong>, determine the indices <strong>s</strong> and <strong>e</strong> of a subarray such that sorting the elements between these indices makes the entire array sorted in non-decreasing order.</span></p>
+<p><span style="font-size: 18px;"><strong>Note:</strong> If the array is already sorted, return [0, 0].</span></p>
+<p><span style="font-size: 18px;"><strong>Examples:</strong></span></p>
+<pre><span style="font-size: 18px;"><strong>Input: </strong>arr[] = [10, 12, 20, 30, 25, 40, 32, 31, 35, 50, 60]
+<strong>Output: </strong>[3, 8]
+<strong>Explanation:</strong> Sorting subarray starting from index 3 and ending at index 8 results in sorted array. <br>Initial array: [10, 12, 20, <strong>30, 25, 40, 32, 31, 35,</strong> 50, 60], <br>Final array: [10, 12, 20, <strong>25, 30, 31, 32, 35, 40,</strong> 50, 60](After sorting the bold part).</span></pre>
+<pre><span style="font-size: 18px;"><strong>Input: </strong>arr[] = [0, 1, 15, 25, 6, 7, 30, 40, 50]
+<strong>Output:</strong> [2, 5]
+<strong>Explanation:</strong> Sorting subarray starting from index 2 and ending at index 5 results in sorted array. <br>Initial array: [0, 1, <strong>15, 25, 6, 7,</strong> 30, 40, 50], <br>Final array: [0, 1, <strong>6, 7, 15, 25,</strong> 30, 40, 50](After sorting the bold part).</span></pre>
+<p><span style="font-size: 18px;"><strong>Constraints:</strong><br>1 ≤ arr.size() ≤ 10<sup>6</sup><br>1 ≤ arr[i] ≤ 2*10<sup>6</sup></span></p></div><p><span style=font-size:18px><strong>Company Tags : </strong><br><code>Flipkart</code>&nbsp;<code>Microsoft</code>&nbsp;<code>MakeMyTrip</code>&nbsp;<code>Adobe</code>&nbsp;<br><p><span style=font-size:18px><strong>Topic Tags : </strong><br><code>Arrays</code>&nbsp;<code>Data Structures</code>&nbsp;

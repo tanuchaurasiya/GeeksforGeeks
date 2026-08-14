@@ -1,29 +1,29 @@
 class Solution {
   public:
-    int minMeetingRooms(vector<int> &arr, vector<int> &dep) {
-        int n = arr.size();
-        sort(arr.begin(), arr.end());
-        sort(dep.begin(), dep.end());
- 
-        int plat_needed = 1, result = 1;
-        int i = 1, j = 0;
- 
-    
-        while (i < n && j < n) {
-            if (arr[i] < dep[j]) {
-                plat_needed++;
+    int minMeetingRooms(vector<int> &start, vector<int> &end) {
+        sort(start.begin(),  start.end());
+        sort(end.begin(),  end.end());
+        
+        int n=start.size();
+        
+        int i=1;
+        int j=0;
+        int res=1;
+        int curr=1;
+        
+        while(i<n)
+        {
+            if(start[i]<end[j]) {
+                curr++;
                 i++;
             }
-    
-            else  {
-                plat_needed--;
+            else{
+                curr--;
                 j++;
             }
-            
-            if (plat_needed > result)
-                result = plat_needed;
-            
+            res=max(res, curr);
         }
-        return result;
+        return res;
     }
+    
 };
